@@ -5,17 +5,40 @@ const AllUser = () => {
 
     const [users, setUsers] = useState([]);
 
-  
+    const [deleteCount, setDeleteCount]= useState(false);
+
+    const [buttonChange, setButtonChange] =useState(false)
+
 
 
       useEffect(() => {
         fetch("http://localhost:4000/users")
           .then((res) => res.json())
           .then((data) => setUsers(data));
-      }, []);
+      }, [deleteCount]);
 
 
+        const handleDelete = (id) => {
+          const proceed = window.confirm(
+            "Are you sure, you want to cancel this order"
+          );
 
+          if (proceed) {
+
+          // console.log(id)
+          fetch(`http://localhost:4000/deleteUsers/${id}`, {
+            method: "DELETE",
+            headers: {
+              "content-type": "application/json",
+            },
+          })
+            .then((res) => res.json())
+            .then((result) => setDeleteCount(result));
+        }
+        
+      };
+
+     
 
 
 
@@ -28,12 +51,22 @@ const AllUser = () => {
             <p key={user._id}>
               {user.FirstName}
               <br />
-              {/* {user.Email} */}
-              <Link to={`/users/${user._id}`}>
-                details
-              </Link>
-              <button>block</button>
-              <button>delete</button>
+              <button>
+                <Link to={`/users/${user._id}`}>details</Link>
+              </button>
+              {buttonChange ? (
+                <>
+               
+                  <button onClick={() => setButtonChange(false)}>unblock</button>
+                </>
+              ) : (
+                <>
+                  <button onClick={() => setButtonChange(true)}>block</button>
+                </>
+              )}
+
+          
+              <button onClick={() => handleDelete(user._id)}>delete</button>
             </p>
           ))}
         </div>

@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 const CreateUser = () => {
 
- 
-
 
 
       const handleAddUser = (event) => {
@@ -30,22 +28,7 @@ const CreateUser = () => {
           .catch((err) => console.log(err));
 
 
-        // fetch("http://localhost:4000/user", {
-        //   method: "POST",
-        //   headers: {
-        //     "content-type": "application/json",
-        //   },
-
-        //   body: JSON.stringify(user),
-        // })
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     console.log(data);
-
-        //     const newUsers = [...users, data];
-        //     setUsers(newUsers);
-        //   })
-        //   .catch((err) => console.error(err));
+       
       };
     return (
       <div>
@@ -59,10 +42,10 @@ const CreateUser = () => {
           <br />
           <input type="text" name="phone" placeholder="Phone Number:" />
           <br />
-          <button type="submit">ADD</button>
+          <button type="submit">Submit</button>
         </form>
 
-        {/* <button type="submit">ADD</button> */}
+        
         <Link  to="/">all user</Link>
       </div>
     );
