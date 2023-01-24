@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
+
 const AllUser = () => {
 
     const [users, setUsers] = useState([]);
@@ -12,10 +13,13 @@ const AllUser = () => {
 
 
       useEffect(() => {
-        fetch("http://localhost:4000/users")
+        fetch("https://asif-sever.vercel.app/users")
           .then((res) => res.json())
           .then((data) => setUsers(data));
       }, [deleteCount]);
+
+
+
 
 
         const handleDelete = (id) => {
@@ -26,7 +30,7 @@ const AllUser = () => {
           if (proceed) {
 
           // console.log(id)
-          fetch(`http://localhost:4000/deleteUsers/${id}`, {
+          fetch(`https://asif-sever.vercel.app/deleteUsers/${id}`, {
             method: "DELETE",
             headers: {
               "content-type": "application/json",
@@ -38,37 +42,73 @@ const AllUser = () => {
         
       };
 
+      const handleBlock = (id) =>{
+        console.log(id);
+        // preventDefault();
+      }
+
      
 
 
 
     return (
       <div>
-        <h1>Total: {users.length}</h1>
+        {/* <Navbar></Navbar> */}
+
+        <h1>Total User: {users.length}</h1>
 
         <div>
-          {users.map((user) => (
-            <p key={user._id}>
-              {user.FirstName}
-              <br />
-              <button>
-                <Link to={`/users/${user._id}`}>details</Link>
-              </button>
-              {buttonChange ? (
-                <>
-               
-                  <button onClick={() => setButtonChange(false)}>unblock</button>
-                </>
-              ) : (
-                <>
-                  <button onClick={() => setButtonChange(true)}>block</button>
-                </>
-              )}
+          <table class="table">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Details</th>
+                <th>Block</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {users.map((user) => (
+                <tr key={user._id}>
+                  <td> {user.FirstName}</td>
 
-          
-              <button onClick={() => handleDelete(user._id)}>delete</button>
-            </p>
-          ))}
+                  <td>
+                    <button>
+                      <Link to={`/users/${user._id}`}>Details</Link>
+                    </button>
+                  </td>
+
+                  <td>
+                    <button onClick={()=>handleBlock(user._id)}>Block</button>
+                    {buttonChange ? (
+                      <>
+                        <button onClick={() => setButtonChange(false)}>
+                          Unblock
+                        </button>
+                      </>
+                    ) : (
+                      <>
+                        <button onClick={() => setButtonChange(true)}>
+                          Block
+                        </button>
+                      </>
+                    )}
+                  </td>
+
+                  <td>
+                    <button onClick={() => handleDelete(user._id)}>
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <br />
+
+          <button>
+            <Link to="/users/create">Create User</Link>
+          </button>
         </div>
       </div>
     );

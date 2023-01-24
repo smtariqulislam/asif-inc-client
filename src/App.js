@@ -6,6 +6,7 @@ import CreateUser from './components/CreateUser';
 import Details from './components/Details';
 
 function App() {
+  
   const router = createBrowserRouter([
     {
       path: "/",
@@ -20,7 +21,7 @@ function App() {
       path: "/users/:id",
       loader: ({params}) =>
         fetch(
-          `http://localhost:4000/users/${params.id}`
+          `https://asif-sever.vercel.app/users/${params.id}`
         ),
       element: <Details></Details>,
     },

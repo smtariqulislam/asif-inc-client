@@ -11,6 +11,8 @@ const Details = () => {
 
   const handleUpdate = event =>{
 
+    window.alert("Sucessful update");
+
       event.preventDefault();
       const FirstName = event.target.First.value;
       const LastName =event.target.Last.value;
@@ -19,7 +21,7 @@ const Details = () => {
       const userUpdate = { FirstName, LastName, Email, PhoneNumber };
       console.log(userUpdate);
 
-    fetch(`http://localhost:4000/users/${user._id}`, {
+    fetch(`https://asif-sever.vercel.app/users/${user._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -40,39 +42,62 @@ const Details = () => {
     <div className="app">
       <h1>Edit Your Profile</h1>
       <form onSubmit={handleUpdate}>
-        <input
-          type="text"
-          name="First"
-          defaultValue={user.FirstName}
-          placeholder="FirstName"
-        />
-        <br />
-        <input
-          type="text"
-          name="Last"
-          defaultValue={user.LastName}
-          placeholder="Last Name:"
-        />
-        <br />
-        <input
-          type="text"
-          name="email"
-          defaultValue={user.Email}
-          placeholder="Email:"
-          disabled
-        />
-        <br />
-        <input
-          type="text"
-          name="phone"
-          defaultValue={user.PhoneNumber}
-          placeholder="Phone Number:"
-        />
-        <br />
+        
+       
 
-        <input type="submit" value="Update" id="" />
+        <ul  className="form-style-1">
+          <li>
+            <label>
+              Full Name <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="First"
+              defaultValue={user.FirstName}
+              placeholder="FirstName"
+              required
+            />{" "}
+            <input
+              type="text"
+              name="Last"
+              defaultValue={user.LastName}
+              placeholder="LastName"
+              required
+            />
+          </li>
+          <li>
+            <label>
+              Email <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="email"
+             className="field-long"
+              defaultValue={user.Email}
+              disabled
+              placeholder="LastName"
+            />
+          </li>
+          <li>
+            <label>
+              Phone Number <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="phone"
+             className="field-long"
+              defaultValue={user.PhoneNumber}
+              placeholder="Phone Number"
+            />
+          </li>
 
+          <li>
+            <input type="submit" value="Update" />
+          </li>
+        </ul>
       </form>
+
+     
     </div>
   );
 };
