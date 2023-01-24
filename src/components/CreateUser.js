@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from './Navbar';
 
+
 const CreateUser = () => {
-
-
 
       const handleAddUser = (event) => {
         event.preventDefault();
@@ -13,7 +12,9 @@ const CreateUser = () => {
         const Email = event.target.email.value;
         const PhoneNumber = event.target.phone.value;
 
-        const user = { FirstName, LastName, Email, PhoneNumber };
+         const block = false;
+
+        const user = { FirstName, LastName, Email, PhoneNumber,block };
         console.log(user);
         event.target.reset();
 
@@ -28,7 +29,6 @@ const CreateUser = () => {
           .then((res) => res.json())
           .then((data) => console.log(data))
           .catch((err) => console.log(err));
-
 
        
       };

@@ -19,6 +19,7 @@ const Details = () => {
       const LastName =event.target.Last.value;
       const Email = event.target.email.value;
       const PhoneNumber = event.target.phone.value;
+     
       const userUpdate = { FirstName, LastName, Email, PhoneNumber };
       console.log(userUpdate);
 

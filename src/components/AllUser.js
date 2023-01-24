@@ -6,20 +6,19 @@ import Navbar from './Navbar';
 const AllUser = () => {
 
     const [users, setUsers] = useState([]);
-
     const [deleteCount, setDeleteCount]= useState(false);
+    const [Block, setUpdatedBlock] = useState(false);
 
-    const [buttonChange, setButtonChange] =useState(false)
 
+     useEffect(() => {
 
+     }, [ Block]);
 
       useEffect(() => {
         fetch("https://asif-sever.vercel.app/users")
           .then((res) => res.json())
           .then((data) => setUsers(data));
-      }, [deleteCount]);
-
-
+      }, [deleteCount,Block]);
 
 
 
@@ -43,12 +42,35 @@ const AllUser = () => {
         
       };
 
-      const handleBlock = (id) =>{
-        console.log(id);
-        // preventDefault();
-      }
+      const handleBlock = (
+        id,
+        block,
+        FirstName,
+        LastName,
+        Email,
+        PhoneNumber
+      ) => {
+        
+        const updatedBlock = !block;
+        const userUpdate = { FirstName,
+        LastName,
+        Email,
+        PhoneNumber, updatedBlock };
+        console.log(userUpdate);
 
-     
+        fetch(`https://asif-sever.vercel.app/users/${id}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(userUpdate),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            setUpdatedBlock((p) => !p);
+          });
+      };
 
 
 
@@ -80,20 +102,12 @@ const AllUser = () => {
                   </td>
 
                   <td>
-                    <button onClick={()=>handleBlock(user._id)}>Block</button>
-                    {buttonChange ? (
-                      <>
-                        <button onClick={() => setButtonChange(false)}>
-                          Unblock
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <button onClick={() => setButtonChange(true)}>
-                          Block
-                        </button>
-                      </>
-                    )}
+                    
+
+                    <button onClick={()=>handleBlock(user._id,user.block,user.FirstName,user.LastName,user.Email,user.PhoneNumber)}>
+
+                      {user?.block ? `Unblock` : `Block`}
+                    </button>
                   </td>
 
                   <td>
