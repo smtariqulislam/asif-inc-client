@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from './Navbar';
 
 
 const AllUser = () => {
@@ -53,7 +54,7 @@ const AllUser = () => {
 
     return (
       <div>
-        {/* <Navbar></Navbar> */}
+        <Navbar></Navbar>
 
         <h1>Total User: {users.length}</h1>
 

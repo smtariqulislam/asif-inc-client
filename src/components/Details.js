@@ -1,5 +1,6 @@
 import React from "react";
 import { useLoaderData } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const Details = () => {
   const user = useLoaderData();
@@ -40,12 +41,10 @@ const Details = () => {
 
   return (
     <div className="app">
+      <Navbar></Navbar>
       <h1>Edit Your Profile</h1>
       <form onSubmit={handleUpdate}>
-        
-       
-
-        <ul  className="form-style-1">
+        <ul className="form-style-1">
           <li>
             <label>
               Full Name <span className="required">*</span>
@@ -72,7 +71,7 @@ const Details = () => {
             <input
               type="text"
               name="email"
-             className="field-long"
+              className="field-long"
               defaultValue={user.Email}
               disabled
               placeholder="LastName"
@@ -85,7 +84,7 @@ const Details = () => {
             <input
               type="text"
               name="phone"
-             className="field-long"
+              className="field-long"
               defaultValue={user.PhoneNumber}
               placeholder="Phone Number"
             />
@@ -96,8 +95,6 @@ const Details = () => {
           </li>
         </ul>
       </form>
-
-     
     </div>
   );
 };

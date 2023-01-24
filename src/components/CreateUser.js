@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const CreateUser = () => {
 
@@ -33,9 +34,9 @@ const CreateUser = () => {
       };
     return (
       <div>
+        <Navbar></Navbar>
         <h1>Please add a new User</h1>
         <form onSubmit={handleAddUser}>
-         
           <ul className="form-style-1">
             <li>
               <label>
@@ -44,17 +45,10 @@ const CreateUser = () => {
               <input
                 type="text"
                 name="First"
-               
                 placeholder="FirstName"
                 required
               />{" "}
-              <input
-                type="text"
-                name="Last"
-                
-                placeholder="LastName"
-                required
-              />
+              <input type="text" name="Last" placeholder="LastName" required />
             </li>
             <li>
               <label>
@@ -64,7 +58,6 @@ const CreateUser = () => {
                 type="text"
                 name="email"
                 className="field-long"
-                
                 placeholder="Email"
               />
             </li>
@@ -76,7 +69,6 @@ const CreateUser = () => {
                 type="text"
                 name="phone"
                 className="field-long"
-             
                 placeholder="Phone Number"
               />
             </li>
